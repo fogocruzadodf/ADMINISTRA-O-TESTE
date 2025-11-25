@@ -112,13 +112,11 @@ export const ServiceManager: React.FC<ServiceManagerProps> = ({ serviceType, rec
     e.stopPropagation(); 
     e.preventDefault();
     
-    // Pequeno timeout para garantir que a UI não trave antes do alert
-    setTimeout(() => {
-        if(window.confirm('Tem certeza que deseja excluir este registro? Esta ação não pode ser desfeita.')) {
-            deleteServiceRecord(id);
-            onRecordChange();
-        }
-    }, 50);
+    // Direct confirmation without timeout for maximum compatibility
+    if(window.confirm('Tem certeza que deseja excluir este registro? Esta ação não pode ser desfeita.')) {
+        deleteServiceRecord(id);
+        onRecordChange();
+    }
   };
 
   const resetForm = () => {
@@ -366,7 +364,7 @@ export const ServiceManager: React.FC<ServiceManagerProps> = ({ serviceType, rec
                                 </span>
                                 <button 
                                     onClick={(e) => handleDelete(e, record.id)}
-                                    className="flex items-center gap-1 bg-white text-red-500 hover:bg-red-50 hover:text-red-700 px-3 py-1.5 rounded-lg transition-colors text-xs font-bold border border-red-100 shadow-sm cursor-pointer z-20 relative"
+                                    className="flex items-center gap-1 bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors text-xs font-bold shadow-md cursor-pointer z-20 relative"
                                     title="Excluir Registro"
                                     type="button"
                                 >
